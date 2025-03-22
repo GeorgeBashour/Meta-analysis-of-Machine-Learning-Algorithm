@@ -1,12 +1,12 @@
 library(metafor)
 
-mlabfun <- function(text, sens) {
+mlabfun <- function(text, res) {
   list(bquote(paste(.(text),
-                    " (Q = ", .(formatC(sens$QE, digits=2, format="f")),
-                    ", df = ", .(sens$k - sens$p),
-                    ", p ", .(metafor:::.pval(sens$QEp, digits=2, showeq=TRUE, sep=" ")), "; ",
-                    I^2, " = ", .(formatC(sens$I2, digits=1, format="f")), "%, ",
-                    tau^2, " = ", .(formatC(sens$tau2, digits=2, format="f")), ")")))
+                    " (Q = ", .(formatC(res$QE, digits=2, format="f")),
+                    ", df = ", .(res$k - res$p),
+                    ", p ", .(metafor:::.pval(res$QEp, digits=2, showeq=TRUE, sep=" ")), "; ",
+                    I^2, " = ", .(formatC(res$I2, digits=1, format="f")), "%, ",
+                    tau^2, " = ", .(formatC(res$tau2, digits=2, format="f")), ")")))
 }
 
 
@@ -106,11 +106,6 @@ oe90$se<- (oe90$oe90u-oe90$oe90l)/2*1.96
 
 res6<-rma(yi= oe90, sei = se, method = "REML",slab =paste(Author),data = oe90)
 
-forest.rma(res6,addpred = TRUE , header = TRUE, cex = 1
-           , showweights = TRUE, refline = FALSE, 
-           shade = "zebra2", atransf = exp,
-           mlab = mlabfun("RE Model", res6),xlab="  O:E ratio Calibration : 90 days (95% CI)")
-
 
 forest.rma(res6,addpred = TRUE , header = TRUE, cex = 1
            , showweights = TRUE, refline = FALSE, 
@@ -127,11 +122,6 @@ oe1$se<- (oe1$oe1u-oe1$oe1l)/2*1.96
 
 
 res7<-rma(yi= oe1, sei = se, method = "REML",slab =paste(Author),data = oe1)
-
-forest.rma(res7,addpred = TRUE , header = TRUE, cex = 1
-           , showweights = TRUE, refline = FALSE, 
-           shade = "zebra2", atransf = exp,
-           mlab = mlabfun("RE Model", res7),xlab="  O:E ratio Calibration: 1 year (95% CI)")
 
 
 forest.rma(res7,addpred = TRUE , header = TRUE, cex = 1
@@ -169,51 +159,4 @@ forest.rma(res9,addpred = TRUE , header = TRUE, cex = 1
            mlab = mlabfun("RE Model", res9),xlab="Calibration Slope : 90 days (95% CI)")
 
 
-
-
-reporter(res9, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res9", format = "word")
-
-
-reporter(res8, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res8", format = "word")
-
-
-reporter(res7, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res7", format = "word")
-
-
-reporter(res6, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res9", format = "word")
-
-
-reporter(res5, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res9", format = "word")
-
-
-reporter(res4, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res9", format = "word")
-
-
-reporter(res3, funnel = FALSE, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res9", format = "word")
-
-
-
-reporter(res2, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res2", format = "word")
-
-
-
-reporter(res1, forest = FALSE, 
-         dir = "C:/college/research/Systematic Reviews/Machine learning and Survival", 
-         filename = "res1", format = "word")
 
